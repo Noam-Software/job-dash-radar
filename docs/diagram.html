@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>רדאר משרות: תרשים</title>
+  <!-- עותק לצפייה בדפדפן. המקור הוא התרשים ב-01-spec.md; אם משנים שם, צריך לעדכן גם כאן. -->
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; }
+    h1 { font-size: 20px; direction: rtl; }
+  </style>
+</head>
+<body>
+  <h1>רדאר משרות: תרשים הזרימה</h1>
+  <pre class="mermaid">
+flowchart LR
+    A["Scheduler&lt;br/&gt;שעון מעורר"] -->|פתק לכל חברה| B["RabbitMQ&lt;br/&gt;תור משימות"]
+    B --> C["Workers&lt;br/&gt;מביאים משרות מהאתרים"]
+    C -->|נתונים גולמיים| D[("Kafka&lt;br/&gt;job.raw")]
+    D --> E["Normalizer&lt;br/&gt;מנקה ומתרגם"]
+    E -->|משרה נקייה| F[("Kafka&lt;br/&gt;job.normalized")]
+    F --> G["PG Writer&lt;br/&gt;שומר במסד"]
+    F --> I["ES Indexer&lt;br/&gt;מוסיף לחיפוש"]
+    G --> H[("PostgreSQL")]
+    I --> J[("Elasticsearch")]
+    G -->|משרה חדשה| K[("Kafka&lt;br/&gt;job.opened")]
+    G -->|משרה נסגרה| Q[("Kafka&lt;br/&gt;job.closed")]
+    Q --> I
+    K --> L["Matcher&lt;br/&gt;נותן ציון"]
+    L -->|פתק שליחה| M["RabbitMQ&lt;br/&gt;notify"]
+    M --> N["Notifier&lt;br/&gt;שולח הודעה"]
+    N --> O["Mailpit&lt;br/&gt;מייל מקומי"]
+    P["API (ASP.NET)"] --> H
+    P --> J
+  </pre>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+</body>
+</html>

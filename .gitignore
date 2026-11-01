@@ -1,0 +1,25 @@
+# סודות וסיסמאות: לא מעלים לעולם
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# מחברות Jupyter
+.ipynb_checkpoints/
+
+# נתונים גולמיים שהורדנו מהאתרים
+data/raw/
+
+# עורכים ומערכת הפעלה
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# .NET (ליום 10)
+bin/
+obj/
