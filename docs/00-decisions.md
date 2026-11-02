@@ -62,8 +62,8 @@
 
 אילוצים: `job_postings.company_id` הוא מפתח זר ל-`companies`, ו-`UNIQUE(ats_type, company_id, external_id)` על `job_postings`.
 
-## נדחה להמשך
-- שפת ה-workers (Scheduler, Workers, Normalizer, Notifier): תיקבע לפני תחילת הקוד. ההמלצה היא Python, והדוגמאות ל-pandas מניחות זאת. ה-API נשאר ב-ASP.NET Core.
+## הוחלט ביום 1 (2026-11-01)
+- שפת ה-workers (Scheduler, Workers, Normalizer, Notifier): **Python**. ה-API נשאר ב-ASP.NET Core.
 
 ## מוצע ועדיין לא אושר במפורש
 - ה-topic `job.opened`: הבודק קורא אותו ולא את `job.normalized`.
